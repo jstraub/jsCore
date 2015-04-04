@@ -25,15 +25,6 @@ endif()
 
 find_package (Eigen3 REQUIRED)
 find_package (CUDA REQUIRED)
-#find_package (OpenMP)
-#find_package (OpenCV REQUIRED)
-#find_package (PCL REQUIRED)
-#FIND_PACKAGE (Boost REQUIRED)
-
-#if (OPENMP_FOUND)
-#  set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
-#  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-#endif()
 
 # add flags depending on build type
 set(CMAKE_CXX_FLAGS_RELEASE "-g -Wall -Wno-deprecated -O2 -finline-functions -DNDEBUG")
@@ -45,20 +36,6 @@ include_directories(
   include
   #./common/inc
   ${EIGEN3_INCLUDE_DIR}
-#  ${PCL_INCLUDE_DIRS}
-  #  /usr/include
-#  $ENV{WORKSPACE_HOME}/research/global/include
-  #/usr/include/pcl-1.7/
-  #  /usr/include/ni
-  #  /usr/include/vtk-5.8/
-#  ${Boost_INCLUDE_DIRS}
-  )
-
-link_directories(
-#  ${PCL_LIBRARY_DIRS}
-#  ${Boost_LIBRARY_DIRS}
-#  $ENV{WORKSPACE_HOME}/research/global/lib
-  #  $ENV{WORKSPACE_HOME}/3rdparty/pcl-pcl-1.7.1/build
   )
 
 cuda_add_library(jsCore SHARED
@@ -66,12 +43,6 @@ cuda_add_library(jsCore SHARED
   ./cuda/labelMap_kernel.cu
   ./cuda/copy_kernel.cu
   )
-
-#INSTALL(TARGETS mmf #realtimeMF_openni
-#  RUNTIME DESTINATION bin
-#  LIBRARY DESTINATION lib
-#  ARCHIVE DESTINATION lib
-#  )
 
 pods_install_libraries(jsCore)
 

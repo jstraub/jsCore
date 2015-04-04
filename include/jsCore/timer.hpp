@@ -1,8 +1,7 @@
 /* Copyright (c) 2015, Julian Straub <jstraub@csail.mit.edu> Licensed
  * under the MIT license. See the license file LICENSE.
  */
-#ifndef TIMER_HPP_
-#define TIMER_HPP_
+#pragma once
 
 #include <iostream>
 #include <sys/time.h>
@@ -93,5 +92,3 @@ inline ostream& operator<<(ostream &out, const Timer& t)
 };
 
 }
-
-#endif /* TIMER_HPP_ */

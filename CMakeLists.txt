@@ -77,4 +77,6 @@ pods_install_libraries(jsCore)
 
 install(DIRECTORY include/jsCore/ DESTINATION include/jsCore/
   FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY include/nvidia/ DESTINATION include/nvidia/
+  FILES_MATCHING PATTERN "*.h")
 

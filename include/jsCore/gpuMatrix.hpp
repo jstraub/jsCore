@@ -1,5 +1,5 @@
-/* Copyright (c) 2014, Julian Straub <jstraub@csail.mit.edu> Licensed
- * under the MIT license. See the license file LICENSE.
+/* Copyright (c) 2014, Julian Straub <jstraub@csail.mit.edu>
+ * Licensed under the MIT license. See the license file LICENSE.
  */
 #pragma once
 
@@ -8,15 +8,11 @@
 #include <vector>
 #include <Eigen/Dense>
 
+#include <cuda_runtime.h>
 #include <nvidia/helper_cuda.h> 
 #include <jsCore/global.hpp>
 
 using namespace Eigen;
-//#ifdef BOOST_OLD
-//#  define shared_ptr boost::shared_ptr
-//#else
-//  using boost::shared_ptr;
-//#endif
 using std::cout;
 using std::endl;
 
@@ -42,6 +38,8 @@ struct GpuMatrix
   ~GpuMatrix();
 
   void set(T A);
+  void set(const T* A, uint32_t rows, uint32_t cols, 
+    uint32_t aPitch, uint32_t gpuPitch);
   void set(const T* A, uint32_t rows, uint32_t cols);
   void set(const std::vector<T>& A);
   void set(const Matrix<T,Dynamic,Dynamic>& A);
@@ -177,6 +175,19 @@ template <class T>
         cudaMemcpyHostToDevice));
   initialized_ = true;
 };
+
+template <class T>
+void GpuMatrix<T>::set(const T* A, uint32_t rows, uint32_t cols,
+    uint32_t aPitch, uint32_t gpuPitch)
+{
+  resize(rows,cols);
+  assert(rows == rows_);
+  assert(cols == cols_);
+  checkCudaErrors(cudaMemcpy2D(data_, gpuPitch*sizeof(T), A,
+        aPitch*sizeof(T), cols_* sizeof(T), rows_,
+        cudaMemcpyHostToDevice));
+  initialized_ = true;
+}
 
 template <class T>
   void GpuMatrix<T>::set(const T* A, uint32_t rows, uint32_t cols)

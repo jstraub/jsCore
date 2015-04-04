@@ -42,6 +42,7 @@ cuda_add_library(jsCore SHARED
   ./cuda/vectorSum_kernel.cu
   ./cuda/labelMap_kernel.cu
   ./cuda/copy_kernel.cu
+  ./cuda/choiceMult_kernel.cu
   )
 
 cuda_add_executable(testReduction

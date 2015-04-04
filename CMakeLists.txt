@@ -44,6 +44,12 @@ cuda_add_library(jsCore SHARED
   ./cuda/copy_kernel.cu
   )
 
+cuda_add_executable(testReduction
+  ./src/testReduction.cpp
+  ./cuda/testReduction.cu
+#  ./cuda/cuda_pcl_helpers.cu
+  )
+
 pods_install_libraries(jsCore)
 
 install(DIRECTORY include/jsCore/ DESTINATION include/jsCore/

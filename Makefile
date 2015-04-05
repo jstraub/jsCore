@@ -23,9 +23,6 @@ ifeq "$(BUILD_TYPE)" ""
 BUILD_TYPE="Release"
 endif
 
-me: pod-build/Makefile
-	$(MAKE) -C pod-build all install
-
 all: pod-build/Makefile
 	$(MAKE) -C pod-build all install
 

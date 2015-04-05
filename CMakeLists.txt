@@ -52,11 +52,24 @@ cuda_add_executable(testReduction
   )
 
 pods_install_libraries(jsCore)
+pods_install_headers(
+  ./include/jsCore/cuda_global.h
+  ./include/jsCore/gpuMatrix.hpp
+  ./include/jsCore/clData.hpp
+  ./include/jsCore/clDataGpu.hpp
+  ./include/jsCore/global.hpp
+  ./include/jsCore/timer.hpp
+  ./include/jsCore/timerLog.hpp
+  DESTINATION jsCore)
+pods_install_headers(
+  ./include/nvidia/helper_string.h
+  ./include/nvidia/helper_cuda.h
+  DESTINATION nvidia)
 
-install(DIRECTORY include/jsCore/ DESTINATION include/jsCore/
-  FILES_MATCHING PATTERN "*.hpp")
-install(DIRECTORY include/jsCore/ DESTINATION include/jsCore/
-  FILES_MATCHING PATTERN "*.h")
-install(DIRECTORY include/nvidia/ DESTINATION include/nvidia/
-  FILES_MATCHING PATTERN "*.h")
+#install(DIRECTORY include/jsCore/ DESTINATION include/jsCore/
+#  FILES_MATCHING PATTERN "*.hpp")
+#install(DIRECTORY include/jsCore/ DESTINATION include/jsCore/
+#  FILES_MATCHING PATTERN "*.h")
+#install(DIRECTORY include/nvidia/ DESTINATION include/nvidia/
+#  FILES_MATCHING PATTERN "*.h")
 

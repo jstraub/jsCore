@@ -47,6 +47,7 @@ struct GpuMatrix
   void set(const shared_ptr<Matrix<T,Dynamic,Dynamic> >& A);
   void set(const shared_ptr<Matrix<T,Dynamic,1> >& A);
   void setZero();
+  void setOnes();
   void setAsync(const T* A, uint32_t rows, uint32_t cols, cudaStream_t& stream);
 
   void get(T& a);
@@ -258,6 +259,15 @@ template <class T>
 void GpuMatrix<T>::setZero()
 {
   Matrix<T,Dynamic,Dynamic> A = Matrix<T,Dynamic,Dynamic>::Zero(rows_,cols_);
+  checkCudaErrors(cudaMemcpy(data_, A.data(), cols_*rows_* sizeof(T),
+        cudaMemcpyHostToDevice));
+  initialized_ = true;
+};
+
+template <class T>
+void GpuMatrix<T>::setOnes()
+{
+  Matrix<T,Dynamic,Dynamic> A = Matrix<T,Dynamic,Dynamic>::Ones(rows_,cols_);
   checkCudaErrors(cudaMemcpy(data_, A.data(), cols_*rows_* sizeof(T),
         cudaMemcpyHostToDevice));
   initialized_ = true;

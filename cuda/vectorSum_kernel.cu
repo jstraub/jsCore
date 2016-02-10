@@ -16,8 +16,7 @@ __global__ void vectorSum_kernel(T *d_x,
     uint32_t *z, uint32_t N, uint32_t k0, T *SSs) 
 {
   // sufficient statistics for whole blocksize
-  // 2 (x in TpS @north) + 1 (count) + 4 (outer product in TpS @north)
-  // all fo that times 6 for the different axes
+  // 3 (sum) + 1 (count) 
   __shared__ T xSSs[BLK_SIZE*SS_DIM*K];
 
   //const int tid = threadIdx.x;

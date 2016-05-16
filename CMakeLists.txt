@@ -60,6 +60,8 @@ pods_install_headers(
   ./include/jsCore/global.hpp
   ./include/jsCore/timer.hpp
   ./include/jsCore/timerLog.hpp
+  ./include/jsCore/vmf.h
+  ./include/jsCore/vmf_impl.h
   DESTINATION jsCore)
 pods_install_headers(
   ./include/nvidia/helper_string.h
